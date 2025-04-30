@@ -2,16 +2,88 @@
 <html>
 <head>
     <title>hawara</title>
-</head>
-    hier gibt es nix zu sehen
-    <p>
-        <a href="./helloworld.html">
-            ZurÃ¼ck
-        </a>
-    </p>
+    <html lang="de">
+    <head>
+        <meta charset="UTF-8">
+        <title>Muadl Quiz</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                padding: 20px;
+            }
+
+            .question {
+                margin-bottom: 20px;
+            }
+
+            .result {
+                font-weight: bold;
+                margin-top: 20px;
+            }
+        </style>
+    </head>
+    <body>
+
+        <h1>Quiz</h1>
+
+        <form id="quizForm">
+
+            <div class="question">
+                <p>1. Wie viele Reiskerndln kann da Reiskocher kochn?</p>
+                <label><input type="radio" name="q1" value="a"> 15972 Reiskerndln</label><br>
+                <label><input type="radio" name="q1" value="b"> 3 Reiskerndln</label><br>
+                <label><input type="radio" name="q1" value="c"> 6 Reiskerndln</label>
+            </div>
+
+            <div class="question">
+                <p>2. Welches is es beste Heisl?</p>
+                <label><input type="radio" name="q2" value="a"> 6er Guif Kombi</label><br>
+                <label><input type="radio" name="q2" value="b"> da Mini</label><br>
+                <label><input type="radio" name="q2" value="c"> díe japanische Importkraxn</label>
+            </div>
+
+            <div class="question">
+                <p>3. Welcher ist der Beste Lehrer der HTL Eisenstadt jemals?</p>
+                <label><input type="radio" name="q3" value="a"> Postmann</label><br>
+                <label><input type="radio" name="q3" value="b"> Selinger</label><br>
+                <label><input type="radio" name="q3" value="c"> Kölndorfer</label>
+            </div>
+
+            <button type="button" onclick="auswerten()">Absenden</button>
+        </form>
+
+        <div class="result" id="result"></div>
+
+        <script>
+        function auswerten() {
+            const richtigeAntworten = {
+                q1: 'b',
+                q2: 'a',
+                q3: 'c'
+            };
+
+            let punkte = 0;
+
+            for (let frage in richtigeAntworten) {
+                const ausgewaehlt = document.querySelector(`input[name="${frage}"]:checked`);
+                if (ausgewaehlt && ausgewaehlt.value === richtigeAntworten[frage]) {
+                    punkte++;
+                }
+            }
+
+            document.getElementById("result").innerText = `Du hast ${punkte} von 3 Punkten erreicht.`;
+        }
+        </script>
+
+  
+<p>
+    <a href="./helloworld.html">
+        Zurück
+    </a>
+</p>
 
 </body>
-</html>
+</html
 <style>
     body {
         background-image: url('Passat.jpg');
