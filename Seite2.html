@@ -1,22 +1,123 @@
 <!DOCTYPE html>
-<html>
+</html>
+<html lang="de">
 <head>
-    <title>hawara</title>
+    <meta charset="UTF-8">
+    <title>Interaktives Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 24px; 
+            padding: 20px;
+            background-image: url('Passat.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+            .question p {
+                font-size: 32px;
+            }
+
+        .answer {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .result {
+            font-weight: bold;
+            margin-top: 20px;
+            font-size: 26px;
+        }
+    </style>
 </head>
-    hier gibt es nix zu sehen
+<body>
+
+    <h1>Quiz</h1>
+
+    <div id="quizContainer">
+        <div class="question" id="question1">
+            <p>1. Wie viele Reiskerndln kann da Reiskocher kochn?</p>
+            <label><input type="radio" name="q1" value="a"> 15972 Reiskerndln</label><br>
+            <label><input type="radio" name="q1" value="b"> 3 Reiskerndln</label><br>
+            <label><input type="radio" name="q1" value="c"> 6 Reiskerndln</label>
+        </div>
+            <button onclick="nextQuestion(1)">Nï¿½chste Frage</button>
+            <div class="result" id="result1"></div>
+        </div>
+
+    <div class="question" id="question2" style="display:none;">
+        <p>2. Welches is es beste Heisl?</p>
+        <label><input type="radio" name="q2" value="a"> 6er Guif Kombi</label><br>
+        <label><input type="radio" name="q2" value="b"> da Mini</label><br>
+        <label><input type="radio" name="q2" value="c"> die japanische Importkraxn</label>
+    </div>
+            <button onclick="nextQuestion(2)">Nï¿½chste Frage</button>
+            <div class="result" id="result2"></div>
+        </div>
+
+            <div class="question" id="question3" style="display:none;">
+                <p>3. Welcher ist der Beste Lehrer der HTL Eisenstadt jemals?</p>
+                <label><input type="radio" name="q3" value="a"> Postmann</label><br>
+                <label><input type="radio" name="q3" value="b"> Selinger</label><br>
+                <label><input type="radio" name="q3" value="c"> Kï¿½lndorfer</label>
+            </div>
+            <button onclick="evaluateQuiz()">Absenden</button>
+            <div class="result" id="result3"></div>
+        </div>
+    </div>
+
+    <div class="result" id="finalResult"></div>
+
+    <script>
+        const richtigeAntworten = {
+            q1: 'b',
+            q2: 'a',
+            q3: 'c'
+        };
+
+        let aktuelleFrage = 1;
+        let punkte = 0;
+
+        function nextQuestion(frageNummer) {
+            // ï¿½berprï¿½fen, ob eine Antwort ausgewï¿½hlt wurde
+            const ausgewaehlt = document.querySelector(`input[name="q${frageNummer}"]:checked`);
+            if (ausgewaehlt) {
+                const antwort = ausgewaehlt.value;
+                const resultDiv = document.getElementById(`result${frageNummer}`);
+
+                // Antwort ï¿½berprï¿½fen
+                if (antwort === richtigeAntworten[`q${frageNummer}`]) {
+                    resultDiv.innerHTML = "Richtig!";
+                    punkte++;
+                } else {
+                    resultDiv.innerHTML = `Falsch! Die richtige Antwort war: ${richtigeAntworten[`q${frageNummer}`]}`;
+                }
+
+                // Nï¿½chste Frage anzeigen
+                document.getElementById(`question${frageNummer}`).style.display = "none";
+                if (frageNummer < 3) {
+                    document.getElementById(`question${frageNummer + 1}`).style.display = "block";
+                }
+            } else {
+                alert("Bitte wï¿½hle eine Antwort aus.");
+            }
+        }
+
+        function evaluateQuiz() {
+            // Endergebnis anzeigen
+            const endResult = document.getElementById("finalResult");
+            endResult.innerText = `Du hast ${punkte} von 3 Punkten erreicht.`;
+        }
+    </script>
     <p>
-        <a href="./HelloWorld.html">
-            Zurück
+        <a href="./helloworld.html">
+            Zurï¿½ck
         </a>
     </p>
-
 </body>
 </html>
-<style>
-    body {
-        background-image: url('Passat.jpg');
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-size: cover;
-    }
-</style>
