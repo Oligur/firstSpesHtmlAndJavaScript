@@ -33,6 +33,7 @@ window.addEventListener("devicemotion", (event) => {
     vx += event.accelaration.x * (event.interval);
     vy += event.accelaration.y * (event.interval);
     vz += event.accelaration.z * (event.interval);
+    sensorList.textContent = vx + ";" + vy + ";" + vz + "v2.1";
 })
 
 
@@ -55,7 +56,7 @@ function upDateScreen() {
     //output.textContent =  "length la: " + laxa.length + "rel: " + roa.length + "abs: " + aoa.length + "\n";
     // if( laxa.length > 0 ){
     //linear acceleration worked
-    sensorList.textContent = vx + ";" + vy + ";" + vz;
+    sensorList.textContent = vx + ";" + vy + ";" + vz + "v2";
     m4.value = vx.toFixed(3);
     m5.value = vy.toFixed(3);
     m6.value = vz.toFixed(3);
