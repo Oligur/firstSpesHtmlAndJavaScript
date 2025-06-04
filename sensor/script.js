@@ -62,7 +62,7 @@ function upDateScreen() {
     m7.value = Math.sqrt(Math.pow(vx, 2) + Math.pow(vy, 2) + Math.pow(vz, 2));
     ball.style.top = (vy * 40 / 500 + 42.5) + "vw";
     ball.style.left = (vx * 40 / 500 + 42.5) + "vw";
-    output.textContent += "vx: " + vx + "vy: " + vy + "vz: " + vz;
+    //output.textContent += "vx: " + vx + "vy: " + vy + "vz: " + vz;
     //   while( laxa.length > 0 ){
     //     laxa.shift();
     //   }
