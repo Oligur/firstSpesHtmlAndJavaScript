@@ -46,7 +46,7 @@ function gardenClick() {
 
 function sensorListClick() {
     sensorList.textContent = "we start soon ";
-    m4.value = -20
+    m4.value = 0
     /*laSensor.start();*/
     const iinterval = setInterval(upDateScreen, 100);
 }
@@ -55,6 +55,7 @@ function upDateScreen() {
     //output.textContent =  "length la: " + laxa.length + "rel: " + roa.length + "abs: " + aoa.length + "\n";
     // if( laxa.length > 0 ){
     //linear acceleration worked
+    sensorList.textContent = vx + ";" + vy + ";" + vz;
     m4.value = vx.toFixed(3);
     m5.value = vy.toFixed(3);
     m6.value = vz.toFixed(3);
