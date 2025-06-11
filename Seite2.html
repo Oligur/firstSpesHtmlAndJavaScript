@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-</html>
 <html lang="de">
 <head>
     <meta charset="UTF-8">
@@ -7,7 +6,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            font-size: 24px; /* 3-mal so gro� wie �blich */
+            font-size: 24px;
             padding: 20px;
             background-image: url('Passat.jpg');
             background-repeat: no-repeat;
@@ -40,38 +39,40 @@
     <h1>Quiz</h1>
 
     <div id="quizContainer">
+        <!-- Frage 1 -->
         <div class="question" id="question1">
-            <p>1. Wie viele Reiskerndln kann da Reiskocher kochn?</p>
-            <label><input type="radio" name="q1" value="a"> 15972 Reiskerndln</label><br>
-            <label><input type="radio" name="q1" value="b"> 3 Reiskerndln</label><br>
-            <label><input type="radio" name="q1" value="c"> 6 Reiskerndln</label>
-        </div>
-            <button onclick="nextQuestion(1)">N�chste Frage</button>
+            <p>1. Wie viele Reiskörner kann der Reiskocher kochen?</p>
+            <label><input type="radio" name="q1" value="a"> 15.972 Reiskörner</label><br>
+            <label><input type="radio" name="q1" value="b"> 3 Reiskörner</label><br>
+            <label><input type="radio" name="q1" value="c"> 6 Reiskörner</label><br>
+            <button onclick="nextQuestion(1)">Nächste Frage</button>
             <div class="result" id="result1"></div>
         </div>
 
-    <div class="question" id="question2" style="display:none;">
-        <p>2. Welches is es beste Heisl?</p>
-        <label><input type="radio" name="q2" value="a"> 6er Guif Kombi</label><br>
-        <label><input type="radio" name="q2" value="b"> da Mini</label><br>
-        <label><input type="radio" name="q2" value="c"> die japanische Importkraxn</label>
-    </div>
-            <button onclick="nextQuestion(2)">N�chste Frage</button>
+        <!-- Frage 2 -->
+        <div class="question" id="question2" style="display:none;">
+            <p>2. Welches ist das beste Auto?</p>
+            <label><input type="radio" name="q2" value="a"> 6er Golf Kombi</label><br>
+            <label><input type="radio" name="q2" value="b"> Der Mini</label><br>
+            <label><input type="radio" name="q2" value="c"> Die japanische Importkiste</label><br>
+            <button onclick="nextQuestion(2)">Nächste Frage</button>
             <div class="result" id="result2"></div>
         </div>
 
-            <div class="question" id="question3" style="display:none;">
-                <p>3. Welcher ist der Beste Lehrer der HTL Eisenstadt jemals?</p>
-                <label><input type="radio" name="q3" value="a"> Postmann</label><br>
-                <label><input type="radio" name="q3" value="b"> Selinger</label><br>
-                <label><input type="radio" name="q3" value="c"> K�lndorfer</label>
-            </div>
+        <!-- Frage 3 -->
+        <div class="question" id="question3" style="display:none;">
+            <p>3. Wer ist der beste Lehrer der HTL Eisenstadt?</p>
+            <label><input type="radio" name="q3" value="a"> Postmann</label><br>
+            <label><input type="radio" name="q3" value="b"> Selinger</label><br>
+            <label><input type="radio" name="q3" value="c"> Kölndorfer</label><br>
             <button onclick="evaluateQuiz()">Absenden</button>
             <div class="result" id="result3"></div>
         </div>
     </div>
 
     <div class="result" id="finalResult"></div>
+
+    <p><a href="./helloworld.html">Zurück</a></p>
 
     <script>
         const richtigeAntworten = {
@@ -80,44 +81,50 @@
             q3: 'c'
         };
 
-        let aktuelleFrage = 1;
         let punkte = 0;
 
         function nextQuestion(frageNummer) {
-            // �berpr�fen, ob eine Antwort ausgew�hlt wurde
             const ausgewaehlt = document.querySelector(`input[name="q${frageNummer}"]:checked`);
             if (ausgewaehlt) {
                 const antwort = ausgewaehlt.value;
                 const resultDiv = document.getElementById(`result${frageNummer}`);
 
-                // Antwort �berpr�fen
                 if (antwort === richtigeAntworten[`q${frageNummer}`]) {
                     resultDiv.innerHTML = "Richtig!";
                     punkte++;
                 } else {
-                    resultDiv.innerHTML = `Falsch! Die richtige Antwort war: ${richtigeAntworten[`q${frageNummer}`]}`;
+                    const richtige = document.querySelector(`input[name="q${frageNummer}"][value="${richtigeAntworten[`q${frageNummer}`]}"]`).parentNode.innerText;
+                    resultDiv.innerHTML = `Falsch! Die richtige Antwort war: ${richtige}`;
                 }
 
-                // N�chste Frage anzeigen
                 document.getElementById(`question${frageNummer}`).style.display = "none";
                 if (frageNummer < 3) {
                     document.getElementById(`question${frageNummer + 1}`).style.display = "block";
                 }
             } else {
-                alert("Bitte w�hle eine Antwort aus.");
+                alert("Bitte wähle eine Antwort aus.");
             }
         }
 
         function evaluateQuiz() {
-            // Endergebnis anzeigen
-            const endResult = document.getElementById("finalResult");
-            endResult.innerText = `Du hast ${punkte} von 3 Punkten erreicht.`;
+            const ausgewaehlt = document.querySelector(`input[name="q3"]:checked`);
+            const resultDiv = document.getElementById("result3");
+
+            if (ausgewaehlt) {
+                const antwort = ausgewaehlt.value;
+                if (antwort === richtigeAntworten.q3) {
+                    resultDiv.innerHTML = "Richtig!";
+                    punkte++;
+                } else {
+                    const richtige = document.querySelector(`input[name="q3"][value="${richtigeAntworten.q3}"]`).parentNode.innerText;
+                    resultDiv.innerHTML = `Falsch! Die richtige Antwort war: ${richtige}`;
+                }
+
+                document.getElementById("finalResult").innerText = `Du hast ${punkte} von 3 Punkten erreicht.`;
+            } else {
+                alert("Bitte wähle eine Antwort aus.");
+            }
         }
     </script>
-    <p>
-        <a href="./helloworld.html">
-            Zur�ck
-        </a>
-    </p>
 </body>
 </html>
